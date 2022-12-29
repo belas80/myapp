@@ -5,11 +5,6 @@ pipeline {
   }
   agent any
   stages {
-    stage('Cloning Git') {
-      steps {
-        git branch: 'main', credentialsId: 'github', url: 'git@github.com:belas80/myapp.git'
-      }
-    }
     stage('Building image') {
       steps{
         script {
