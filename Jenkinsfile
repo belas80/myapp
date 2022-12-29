@@ -24,7 +24,7 @@ pipeline {
     stage('Deploy') {
       when { tag "v*" }
       steps {
-        echo 'Deploying only because this commit is tagged... $TAG_NAME'
+        echo "Deploying only because this commit is tagged... $TAG_NAME"
       }
     }
     stage('Remove Unused docker image') {
