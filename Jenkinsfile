@@ -19,8 +19,7 @@ node {
   stage ('Deploying image'){
     if (env.TAG_NAME =~ '^v') {
       git branch: 'main', credentialsId: 'github', url: 'git@github.com:belas80/devops-diplom-netology.git'
-      sh "cd app"
-      sh "qbec apply stage --vm:ext-str myapp_image_tag=$myAppTag"
+      sh "pwd"
     }
   }
   stage ('Remove Unused docker image'){
