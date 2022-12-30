@@ -6,18 +6,10 @@ pipeline {
   agent any
   stages {
     stage('Building image') {
-      steps{
+      steps {
+        echo "Current TAG_NAME = $TAG_NAME"
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    stage('Pushing image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
         }
       }
     }
@@ -25,11 +17,6 @@ pipeline {
       when { tag "v*" }
       steps {
         echo "Deploying only because this commit is tagged... $registry:$TAG_NAME"
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
   }
