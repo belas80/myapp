@@ -18,7 +18,7 @@ node {
   }
   stage ('Deploying image'){
     if (env.TAG_NAME =~ '^v') {
-      echo "Deploying only because this commit is tagged... ${myApp.imageName()}"
+      sh "qbec apply stage --vm:ext-str myapp_image_tag=$myAppTag"
     }
   }
   stage ('Remove Unused docker image'){
