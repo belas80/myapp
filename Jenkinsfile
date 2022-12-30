@@ -1,11 +1,25 @@
 node {
-  def registry = "belas80/myapp"
-  stage ('Pushing image'){
-    echo "Current TAG_NAME = ${env.TAG_NAME}"
+  registry = "belas80/myapp"
+  stage ('Building image'){
     if (env.TAG_NAME =~ '^v') {
-        echo "I only execute on the master branch. Tag = $registry:${env.TAG_NAME}"
+        myAppTag = "${env.TAG_NAME}"
     } else {
-        echo 'I execute elsewhere Tag = $registry:${env.BUILD_NUMBER}'
+        myAppTag = "${env.BUILD_NUMBER}"
     }
+    myApp = docker.build "$registry:$myAppTag"
+  }
+  stage ('Pushing image'){
+    docker.withRegistry('', 'dockerhub') {
+      myApp.push()
+    }
+  }
+  stage ('Deploying image'){
+    if (env.TAG_NAME =~ '^v') {
+      echo "Deploying only because this commit is tagged... $registry:$myAppTag"
+    }
+  }
+  stage ('Remove Unused docker image'){
+    echo "bla bla bla ${myApp.imageName()}"
+    sh "docker rmi $registry:$myAppTag"
   }
 }
