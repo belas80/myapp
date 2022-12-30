@@ -18,11 +18,11 @@ node {
   }
   stage ('Deploying image'){
     if (env.TAG_NAME =~ '^v') {
-      echo "Deploying only because this commit is tagged... $registry:$myAppTag"
+      echo "Deploying only because this commit is tagged... ${myApp.imageName()}"
     }
   }
   stage ('Remove Unused docker image'){
     echo "bla bla bla ${myApp.imageName()}"
-    sh "docker rmi $registry:$myAppTag"
+    sh "docker rmi ${myApp.imageName()}"
   }
 }
