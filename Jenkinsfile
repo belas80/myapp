@@ -22,7 +22,6 @@ node {
     }
   }
   stage ('Remove Unused docker image'){
-    echo "bla bla bla ${myApp.imageName()}"
     sh "docker rmi ${myApp.imageName()}"
   }
 }
