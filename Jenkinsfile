@@ -20,7 +20,7 @@ node {
     if (env.TAG_NAME =~ '^v') {
       git branch: 'main', credentialsId: 'github', url: 'git@github.com:belas80/devops-diplom-netology.git'
       dir("app") {
-        sh "pwd"
+        sh "qbec apply stage --vm:ext-str myapp_image_tag=$myAppTag --yes"
       }
     }
   }
