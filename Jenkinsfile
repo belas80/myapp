@@ -5,7 +5,7 @@ node {
     if (env.TAG_NAME == 'v*') {
         echo 'I only execute on the master branch. Tag = $TAG_NAME'
     } else {
-        echo 'I execute elsewhere Tag = $TAG_NAME'
+        echo "I execute elsewhere Tag = ${env.BUILD_NUMBER}"
     }
   }
 }
