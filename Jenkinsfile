@@ -19,7 +19,9 @@ node {
   stage ('Deploying image'){
     if (env.TAG_NAME =~ '^v') {
       git branch: 'main', credentialsId: 'github', url: 'git@github.com:belas80/devops-diplom-netology.git'
-      sh "pwd"
+      dir("folder") {
+        sh "pwd"
+      }
     }
   }
   stage ('Remove Unused docker image'){
