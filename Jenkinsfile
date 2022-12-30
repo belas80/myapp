@@ -1,5 +1,6 @@
 node {
   registry = "belas80/myapp"
+  myApp = ''
   stage ('Building image'){
     if (env.TAG_NAME =~ '^v') {
         myAppTag = "${env.TAG_NAME}"
