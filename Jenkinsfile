@@ -7,10 +7,10 @@ pipeline {
   stages {
     stage('Building image') {
       steps {
-        echo "Current TAG_NAME = $TAG_NAME"
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
+        echo "Current TAG_NAME = ${env.TAG_NAME}"
+//         script {
+//           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+//         }
       }
     }
     stage('Deploy') {
